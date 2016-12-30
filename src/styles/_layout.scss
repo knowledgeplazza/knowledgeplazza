@@ -1,0 +1,11 @@
+// Layout:
+@import 'includemedia';
+
+// Import this file in any stylesheet that need to access these variables
+
+$breakpoints: (
+  'xsmall': 600px, // Think phone in portrait; one section of contentent
+  'small': 960, // Tablet in portrait or medium-sized phone in landscape (1/2 sections of content)
+  'medium': 1028px, // Tablet in landscape
+  'large': 1600px // Anything larger than this just add margin
+);

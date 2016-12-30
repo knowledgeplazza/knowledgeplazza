@@ -1,0 +1,25 @@
+<md-input [formControl]="groupName" placeholder="Group Name" dividerColor="primary" (blur)="setGroupName(groupName.value)">
+</md-input>
+
+<app-user-search (userChosen)="addPerson($event)"></app-user-search>
+
+<md-divider></md-divider>
+
+<div *ngIf="group">
+    <md-nav-list>
+        <md-list-item *ngFor="let member of group.members; let i = index">
+            <img md-list-avatar [appAsset]="'/archive/washington.jpg'" alt="">
+            <a md-line>{{member.username}}</a>
+
+            <!-- menu opens when trigger button is clicked -->
+            <button md-icon-button [md-menu-trigger-for]="menu">
+                <md-icon>more_vert</md-icon>
+            </button>
+
+            <md-menu #menu="mdMenu" x-position="before">
+                <button md-menu-item color="warn" (click)="removeAt(i)"> Remove </button>
+            </md-menu>
+        </md-list-item>
+
+    </md-nav-list>
+</div>
