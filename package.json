@@ -4,12 +4,10 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "ng": "ng",
-    "ts-node": "./node_modules/.bin/ts-node",
-    "app": "ng serve",
-    "svr": "ts-node --project svr ./svr/index.ts",
-    "svr:watch": "nodemon --exec \"ts-node --project svr\" ./svr/index.ts --watch svr",
-    "start": "concurrently \"npm run app\" \"npm run svr\"",
+    "app": "./node_modules/.bin/ng serve",
+    "app:build": "./node_modules/.bin/ng build --prod",
+    "svr": "nodemon --exec \"ts-node --project svr\" ./svr/index.ts --watch svr",
+    "start": "concurrently \"npm run app:build\" \"npm run svr\"",
     "lint": "tslint \"src/**/*.ts\" \"svr/**/*.ts\""
   },
   "private": true,

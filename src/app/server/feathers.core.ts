@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 
 import * as RxJS from 'rxjs';
 
-import * as io from 'socket.io-client';
 import * as feathers from 'feathers';
-import * as hooks from 'feathers-hooks';
-import * as socketio from 'feathers-socketio/client';
-import * as reactive from 'feathers-reactive';
 import * as authentication from 'feathers-authentication/client';
+import * as hooks from 'feathers-hooks';
+import * as reactive from 'feathers-reactive';
+import * as socketio from 'feathers-socketio/client';
+import * as io from 'socket.io-client';
 
 // const HOST = 'https://wizzardlizzard-server-datboricua.c9users.io';
 const HOST = 'http://localhost:8080';
@@ -24,10 +24,10 @@ export class FeathersCore {
       .configure(socketio(this.socket))
       .configure(hooks())
       .configure(reactive(RxJS, {
-        idField: '_id'
+        idField: '_id',
       }))
       .configure(authentication({
-        storage: window.localStorage
+        storage: window.localStorage,
       }));
   }
 

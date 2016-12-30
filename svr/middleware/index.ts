@@ -1,6 +1,6 @@
 import handler = require('feathers-errors/handler');
-import { notFound } from './not-found-handler';
 import { logger } from './logger';
+import { notFound } from './not-found-handler';
 
 module.exports = function() {
   // Add your custom middleware here. Remember, that

@@ -2,7 +2,7 @@
   "host": "localhost",
   "port": 8080,
   "nedb": "../data/",
-  "public": "../public/",
+  "public": "../dist/",
   "auth": {
     "token": {
       "secret": "sn//BVRlOSQlCifbOevWwsPkoPmyESe7VAVWnOmboacOnix7N4k/gEp7PhK1ZNdnmvwqqGEsJ0TfWtJgTp9ABg=="

@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import { FeathersService } from './feathers.service';
 import { feathersCore } from './feathers.core';
+import { FeathersService } from './feathers.service';
 
 @Injectable()
 export class LoginService extends FeathersService<any> {
@@ -48,14 +48,14 @@ export class LoginService extends FeathersService<any> {
     return this.authenticate({
       type: 'local',
       'username': username,
-      'password': password
+      'password': password,
     });
   }
 
   public createUser(username: string, password: string) {
     return this.create({
       username: username,
-      password: password
+      password: password,
     }).first()
     .switchMap(() => {
       return this.login(username, password);

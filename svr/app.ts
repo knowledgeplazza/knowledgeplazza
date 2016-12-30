@@ -1,6 +1,4 @@
 import path = require('path');
-// const serveStatic = require('feathers').static;
-// const favicon = require('serve-favicon');
 import compress = require('compression');
 import cors = require('cors');
 import feathers = require('feathers');
@@ -18,8 +16,6 @@ app.configure(configuration());
 app.use(compress())
   .options('*', cors())
   .use(cors())
-  // .use(favicon( path.join(app.get('public'), 'favicon.ico') ))
-  // .use('/', serveStatic( app.get('public') ))
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
   .configure(hooks())
