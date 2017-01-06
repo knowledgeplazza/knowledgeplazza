@@ -9,4 +9,4 @@ To run this project, setup your computer using these steps:
 1. Download [nvm](http://nvm.sh)
 2. Run `nvm install v6` (We have been running our project on node v6)
 3. Open the directory of the project on your computer and run `npm install` to install all necessary packages
-5. Run `npm start` to get started
+5. Run `npm build` and `npm start` to get started
