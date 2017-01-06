@@ -9,7 +9,7 @@
     "svr:watch": "nodemon --exec \"ts-node --project svr\" ./svr/index.ts --watch svr",
     "svr:build": "tsc --project ./svr",
     "svr": "node ./svr-output",
-    "start": "npm run build & npm run svr",
+    "start": "npm run build; npm run svr",
     "build": "npm run app:build & npm run svr:build",
     "lint": "tslint \"src/**/*.ts\" \"svr/**/*.ts\""
   },
