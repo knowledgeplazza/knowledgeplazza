@@ -7,7 +7,3 @@ export class Question {
 
   public category?: string;
 }
-
-export class QuestionCategory {
-  public name: string;
-}

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { Person, Group } from './groups.model';
+import { Group } from 'models/group';
+import { User } from 'models/user';
 
 import { FeathersService } from '^server/feathers.service';
 
@@ -13,19 +14,19 @@ export class GroupsService extends FeathersService<Group> {
   }
 
   create(name: string) {
-    return super.create({
-      'name': name
-    });
+    return super.create({ name });
   }
 
-  addMember(group: Group, person: Person) {
-    group.members.push(person);
-    return super.patch(group._id, { members: group.members});
+  addMember(group: Group, person: User) {
+    let members = group.members;
+    members.push(person);
+    return super.patch(group._id, { members });
   }
 
   removeAt(group: Group, index: number) {
-    group.members.splice(index, 1);
-    return super.patch(group._id, { members: group.members});
+    let members = group.members;
+    members.splice(index, 1);
+    return super.patch(group._id, { members });
   }
 
 }

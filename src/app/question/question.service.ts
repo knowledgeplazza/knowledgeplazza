@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { FeathersService } from '^server/feathers.service';
-import { Question } from './question.model';
+import { Question } from 'models/question';
 
 @Injectable()
 export class QuestionService extends FeathersService<Question> {
@@ -18,6 +18,7 @@ export class QuestionService extends FeathersService<Question> {
       query.category = category;
     }
 
+    // if there is a current question, make sure the next one is different
     if (currentId) {
       query._id = { $ne: currentId };
     }

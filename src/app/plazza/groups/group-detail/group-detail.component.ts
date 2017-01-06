@@ -1,15 +1,16 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
+import { Group } from 'models/group';
+import { User } from 'models/user';
 import { GroupsService } from '../groups.service';
-import { Group, Person } from '../groups.model';
 
 @Component({
   selector: 'app-group-detail',
-  templateUrl: './group-detail.component.html'
+  templateUrl: './group-detail.component.html',
 })
 export class GroupDetailComponent implements OnInit, OnDestroy {
   private group: Group;
@@ -17,7 +18,8 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private groupsService: GroupsService,
     private changeDetector: ChangeDetectorRef) {
   }
@@ -26,7 +28,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     // gets the id the the url/route
     this.subscription = this.route.params.map(params => params['id']).switchMap(id => {
       return this.groupsService.get(id);
-    }).takeWhile((group) => {
+    }).takeWhile(group => {
       return group != null; // group will be null when this group is deleted. If it is, just stop updating
     }).subscribe(group => {
       this.group = group;
@@ -50,7 +52,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     this.groupsService.removeAt(this.group, indexOfPerson);
   }
 
-  addPerson(person: Person) {
+  addPerson(person: User) {
     this.groupsService.addMember(this.group, person);
   }
 }

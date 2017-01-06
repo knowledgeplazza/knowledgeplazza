@@ -2,13 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { FeathersService } from '^server/feathers.service';
-import { Question } from './question.model';
-
-export class QuestionCheckData {
-  isCorrect: boolean;
-  stat: any;
-  correctAnswer: number;
-}
+import { Question } from 'models/question';
+import { QuestionCheckData } from 'models/question-check';
 
 @Injectable()
 export class QuestionCheckService extends FeathersService<QuestionCheckData> {
@@ -20,7 +15,7 @@ export class QuestionCheckService extends FeathersService<QuestionCheckData> {
   checkQuestion(question: Question, chosenAnswer: number) {
     return this.create({
       questionId: question._id,
-      'chosenAnswer': chosenAnswer
+      chosenAnswer,
     });
   }
 }

@@ -1,4 +1,3 @@
-import path = require('path');
 import compress = require('compression');
 import cors = require('cors');
 import feathers = require('feathers');

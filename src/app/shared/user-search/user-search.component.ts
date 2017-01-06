@@ -1,12 +1,13 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
-import { UserService, User } from '^server/user.service';
+import { UserService } from '^server/user.service';
+import { User } from 'models/user';
 
 @Component({
   selector: 'app-user-search',
-  templateUrl: './user-search.component.html'
+  templateUrl: './user-search.component.html',
 })
 export class UserSearchComponent implements OnInit {
   private userQuery = new FormControl();

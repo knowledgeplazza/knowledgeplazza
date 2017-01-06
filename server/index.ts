@@ -7,8 +7,10 @@ const dist = path.normalize(app.get('public'));
 const port = app.get('port');
 
 app.use(express.static(dist));
+
+// load our angular app for all paths
 app.get('*', (req, res) => {
-  res.sendFile(path.join(dist, '/index.html')); // load our index.html file
+  res.sendFile(path.join(dist, '/index.html'));
 });
 
 const server = app.listen(port);
@@ -22,7 +24,7 @@ process.on('unhandledRejection', (reason, p) => {
   console.error('Unhandled Rejection at: Promise ', p, ' reason: ', reason);
 });
 
-process.on('uncaughtException', function (err) {
+process.on('uncaughtException', err => {
   console.error(err);
 });
 

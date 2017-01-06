@@ -3,14 +3,10 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { FeathersService } from '^server/feathers.service';
-import { User, UserService } from '^server/user.service';
+import { UserService } from '^server/user.service';
 
-export class Stat {
-  user: User;
-  correct: number;
-  answeredCount: number;
-  categories: any;
-}
+import { Stat } from 'models/stat';
+import { User } from 'models/user';
 
 @Injectable()
 export class StatsService extends FeathersService<Stat> {

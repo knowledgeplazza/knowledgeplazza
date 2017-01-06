@@ -1,20 +1,21 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
+import { Group } from 'models/group';
 import { GroupsService } from '../groups.service';
-import { Group } from '../groups.model';
 
 import { BattlesService } from '../battles/battles.service';
 
 @Component({
   selector: 'app-groups-list',
   templateUrl: './group-list.component.html',
-  styleUrls: ['./group-list.component.scss']
+  styleUrls: ['./group-list.component.scss'],
 })
 export class GroupsListComponent implements OnInit {
 
-  constructor(private groupsService: GroupsService,
+  constructor(
+    private groupsService: GroupsService,
     private battlesService: BattlesService,
     private router: Router,
     private route: ActivatedRoute) { }

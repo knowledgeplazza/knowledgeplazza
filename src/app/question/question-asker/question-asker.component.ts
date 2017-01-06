@@ -1,15 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MdSnackBar, MdSnackBarRef } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
-import { QuestionService } from '../question.service';
-import { Question } from '../question.model';
+import { Question } from 'models/question';
 import { QuestionCheckService } from '../question-check.service';
+import { QuestionService } from '../question.service';
+
 @Component({
   selector: 'app-question-asker',
-  templateUrl: './question-asker.component.html'
+  templateUrl: './question-asker.component.html',
 })
 export class QuestionAskerComponent implements OnInit, OnDestroy {
   private question: Question;
@@ -24,7 +25,8 @@ export class QuestionAskerComponent implements OnInit, OnDestroy {
     return Observable.interval(2000).first();
   }
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private snackBar: MdSnackBar,
     private questionService: QuestionService,
@@ -35,7 +37,7 @@ export class QuestionAskerComponent implements OnInit, OnDestroy {
     Observable.combineLatest(
       this.questionAdvance,
       this.route.params.map(params => params['id']),
-      this.route.queryParams.map(queryParams => queryParams['category'])
+      this.route.queryParams.map(queryParams => queryParams['category']),
     ).switchMap(values => {
       let currentId = values[0];
       let routeId = values[1];
@@ -66,8 +68,7 @@ export class QuestionAskerComponent implements OnInit, OnDestroy {
     this.questionChecker.checkQuestion(this.question, chosenAnswer).subscribe(data => {
       this.correctAnswer = data.correctAnswer;
 
-      // tslint:disable-next-line:triple-equals
-      if (this.correctAnswer == chosenAnswer) {
+      if (this.correctAnswer === chosenAnswer) {
         this.snackBarRef = this.snackBar.open('You chose the correct answer!');
       } else {
         this.snackBarRef = this.snackBar.open('You chose the wrong answer...');
