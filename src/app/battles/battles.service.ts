@@ -13,7 +13,9 @@ export class BattlesService extends FeathersService<Battle> {
   }
 
   public battleNow() {
-    this.router.navigate(['/b', { now: true }]);
+    this.create({}).subscribe(battle => {
+      this.router.navigate(['/b', battle._id]);
+    });
   }
 
 }
