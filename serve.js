@@ -10,4 +10,4 @@ app.get("*", (req, res) => {
 });
 
 // Start the app by listening on the default port
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8080, process.env.IP || "localhost");
