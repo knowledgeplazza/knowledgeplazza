@@ -4,13 +4,14 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "app": "./node_modules/.bin/ng serve",
+    "app": "node src/server.js",
+    "app:watch": "./node_modules/.bin/ng serve",
     "app:build": "./node_modules/.bin/ng build --aot --prod",
-    "api": "nodemon --exec \"ts-node --project api\" ./api/index.ts --watch api",
+    "api": "node api-output/index.js",
+    "api:watch": "nodemon --exec \"ts-node --project api\" ./api/index.ts --watch api",
     "api:build": "tsc --project ./api",
-    "start": "node main.js",
+    "start": "npm run app & npm run api",
     "build": "npm run app:build & npm run api:build",
-    "heroku-postbuild": "npm run build",
     "lint": "tslint \"src/**/*.ts\" \"api/**/*.ts\""
   },
   "private": true,
