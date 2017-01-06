@@ -5,9 +5,12 @@ import { BattleComponent } from './battle.component';
 
 const battlesRoutes: Routes = [
   {
+    path: ':id',
+    component: BattleComponent,
+  },
+  {
     path: '',
     component: BattleComponent,
-    // canActivate: [CanActivatePlazza],
   },
 ];
 
