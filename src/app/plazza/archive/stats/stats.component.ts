@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { StatsService, Stat } from './stats.service';
+import { StatsService } from './stats.service';
+
+import { Stat } from 'models/stat';
 
 @Component({
   selector: 'app-stats',
-  templateUrl: './stats.component.html'
+  templateUrl: './stats.component.html',
 })
 export class StatsComponent implements OnInit {
   public userStats;
@@ -11,7 +13,7 @@ export class StatsComponent implements OnInit {
   constructor(private statsService: StatsService) { }
 
   ngOnInit() {
-    this.statsService.userStats.subscribe((userStats) => {
+    this.statsService.userStats.subscribe(userStats => {
       this.userStats = userStats;
     });
   }
