@@ -8,6 +8,7 @@
     "app:build": "./node_modules/.bin/ng build --prod",
     "svr": "nodemon --exec \"ts-node --project svr\" ./svr/index.ts --watch svr",
     "start": "concurrently \"npm run app:build\" \"npm run svr\"",
+    "build": "tsc --project ./svr & npm run app:build",
     "lint": "tslint \"src/**/*.ts\" \"svr/**/*.ts\""
   },
   "private": true,
