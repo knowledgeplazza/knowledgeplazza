@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { Battle } from './battle.model';
+import { Battle } from 'models/battle';
 
 import { FeathersService } from '^server/feathers.service';
 
 @Injectable()
 export class BattlesService extends FeathersService<Battle> {
 
-  constructor() {
+  constructor(private router: Router) {
     super('battles');
+  }
+
+  public battleNow() {
+    this.router.navigate(['/b']);
   }
 
 }

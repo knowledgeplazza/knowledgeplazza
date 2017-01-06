@@ -1,4 +1,4 @@
-import { Group } from '^plazza/groups/groups.model';
+import { Group } from './group';
 
 /**
  * Battle

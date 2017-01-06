@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from '@angular/material';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
-import { ServerModule } from './server/server.module';
-import { QuestionModule } from './question/question.module';
+import { BattlesService } from './battles/battles.service';
+
 import { routing } from './app.routing';
+import { QuestionModule } from './question/question.module';
+import { ServerModule } from './server/server.module';
 
 @NgModule({
   declarations: [
-    AppComponent
-    ],
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
     MaterialModule.forRoot(),
@@ -20,11 +22,11 @@ import { routing } from './app.routing';
 
     ServerModule,
     QuestionModule,
-    routing
+    routing,
   ],
   providers: [
-
+    BattlesService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

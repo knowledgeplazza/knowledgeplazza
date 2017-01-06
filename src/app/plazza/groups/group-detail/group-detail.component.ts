@@ -44,7 +44,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
 
   setGroupName(name: string) {
     if (this.group.name !== name) { // Only update if the name actually changed
-      this.groupsService.patch(this.group._id, { 'name': name, members: this.group.members });
+      this.groupsService.patch(this.group._id, { name, members: this.group.members });
     }
   }
 

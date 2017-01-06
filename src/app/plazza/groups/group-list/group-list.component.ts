@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Group } from 'models/group';
 import { GroupsService } from '../groups.service';
 
-import { BattlesService } from '../battles/battles.service';
+import { BattlesService } from '^battles/battles.service';
 
 @Component({
   selector: 'app-groups-list',
@@ -21,7 +21,6 @@ export class GroupsListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    // angular doesn't automatically detect changes from feathers
   }
 
   get groups() {
@@ -39,5 +38,9 @@ export class GroupsListComponent implements OnInit {
 
   openGroup(id: string) {
     this.router.navigate(['../group', id], {relativeTo: this.route});
+  }
+
+  battle() {
+    this.battlesService.battleNow();
   }
 }

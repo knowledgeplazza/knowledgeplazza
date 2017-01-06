@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '^shared/shared.module';
 
 import { GroupsService } from './groups.service';
-import { BattlesService } from './battles/battles.service';
 
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { GroupsListComponent } from './group-list/group-list.component';
@@ -14,10 +13,10 @@ import { GroupsListComponent } from './group-list/group-list.component';
   imports: [
     SharedModule,
     ReactiveFormsModule,
-    RouterModule.forChild([])
+    RouterModule.forChild([]),
   ],
   exports: [],
   declarations: [GroupDetailComponent, GroupsListComponent],
-  providers: [GroupsService, BattlesService]
+  providers: [GroupsService],
 })
 export class GroupsModule { }

@@ -1,5 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { RedirectHome } from '^server/login.guard';
 import { AppComponent } from './app.component';
@@ -9,19 +9,23 @@ const appRoutes: Routes = [
     path: '',
     pathMatch: 'full',
     canActivate: [RedirectHome],
-    component: AppComponent
+    component: AppComponent,
   },
   {
     path: 'splash',
-    loadChildren: 'app/splash/splash.module#SplashModule'
+    loadChildren: 'app/splash/splash.module#SplashModule',
   },
   {
     path: 'plazza',
-    loadChildren: 'app/plazza/plazza.module#PlazzaModule'
+    loadChildren: 'app/plazza/plazza.module#PlazzaModule',
   },
   {
     path: 'login',
     loadChildren: 'app/login/login.module#LoginModule',
+  },
+  {
+    path: 'b',
+    loadChildren: 'app/battles/battles.module#BattlesModule',
   },
 ];
 
