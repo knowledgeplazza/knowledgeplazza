@@ -1,9 +1,12 @@
-import { Group } from './group';
+import { Stat } from './stat';
+import { User } from './user';
 
 /**
  * Battle
  */
 export class Battle {
-  date: Date;
-  group: Group;
+  private: boolean;
+  owner: User;
+  createdAt: Date;
+  members: Stat[];
 }
