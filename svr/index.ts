@@ -4,7 +4,7 @@ import app from './app';
 
 // normalize path becuase sendfile does not like .. in paths
 const dist = path.normalize(app.get('public'));
-const port = process.env.port || 8080;
+const port = process.env.PORT || 8080;
 
 app.use(express.static(dist));
 
