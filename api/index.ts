@@ -1,6 +1,6 @@
 import app from './app';
 
-const port = process.env.PORT || 8081;
+const port = 8081;
 const host = process.env.IP || 'localhost';
 
 const server = app.listen(port, host);
