@@ -4,10 +4,10 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "app": "node src/server.js",
+    "app": "node serve.js",
     "app:watch": "./node_modules/.bin/ng serve",
     "app:build": "./node_modules/.bin/ng build --aot --prod",
-    "api": "node api-output/index.js",
+    "api": "node api-output",
     "api:watch": "nodemon --exec \"ts-node --project api\" ./api/index.ts --watch api",
     "api:build": "tsc --project ./api",
     "start": "npm run app & npm run api",
