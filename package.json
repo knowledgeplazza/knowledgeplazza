@@ -4,17 +4,18 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "app:watch": "./node_modules/.bin/ng serve",
-    "app:build": "./node_modules/.bin/ng build --prod",
-    "svr:watch": "nodemon --exec \"ts-node --project svr\" ./svr/index.ts --watch svr",
-    "svr:build": "tsc --project ./svr",
-    "start": "node ./svr-output",
-    "build": "npm run app:build & npm run svr:build",
-    "heroku-postbuild": "npm run svr:build",
-    "lint": "tslint \"src/**/*.ts\" \"svr/**/*.ts\""
+    "app": "./node_modules/.bin/ng serve",
+    "app:build": "./node_modules/.bin/ng build --aot --prod",
+    "api": "nodemon --exec \"ts-node --project api\" ./api/index.ts --watch api",
+    "api:build": "tsc --project ./api",
+    "start": "node main.js",
+    "build": "npm run app:build & npm run api:build",
+    "heroku-postbuild": "npm run build",
+    "lint": "tslint \"src/**/*.ts\" \"api/**/*.ts\""
   },
   "private": true,
   "dependencies": {
+    "angular-cli": "1.0.0-beta.24",
     "@angular/common": "^2.4.0",
     "@angular/compiler": "^2.4.0",
     "@angular/compiler-cli": "^2.4.0",
@@ -64,7 +65,6 @@
     "zone.js": "^0.7.4"
   },
   "devDependencies": {
-    "angular-cli": "1.0.0-beta.24",
     "codelyzer": "~2.0.0-beta.1",
     "concurrently": "^3.1.0",
     "forever": "^0.15.3",

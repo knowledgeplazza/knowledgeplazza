@@ -1,5 +1,7 @@
 import compress = require('compression');
 import cors = require('cors');
+import express = require('express');
+import path = require('path');
 import feathers = require('feathers');
 import configuration = require('feathers-configuration');
 import hooks = require('feathers-hooks');

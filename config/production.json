@@ -1,6 +1,5 @@
 {
   "nedb": "../data/",
-  "public": "../dist/",
   "auth": {
     "token": {
     },
