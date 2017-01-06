@@ -4,9 +4,12 @@ const auth = require('feathers-authentication').hooks;
 import utils = require('feathers-hooks-common/lib/utils');
 
 function calcName() {
-  return hook => {
-    hook.result.name = 'A battle';
-  };
+
+  return hooks.serialize({
+    computed: {
+      name: () => 'A Battle',
+    },
+  });
 };
 
 export = {
