@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  host: 'localhost',
+  host: 'knowledgeplazza-rjsmith1999.c9users.io',
 };

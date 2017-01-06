@@ -9,8 +9,9 @@ import * as reactive from 'feathers-reactive';
 import * as socketio from 'feathers-socketio/client';
 import * as io from 'socket.io-client';
 
-// const HOST = 'https://wizzardlizzard-server-datboricua.c9users.io';
-const HOST = 'http://localhost:8080';
+import { environment } from 'environments/environment';
+
+let HOST = environment.host + ':8081';
 
 @Injectable()
 export class FeathersCore {
