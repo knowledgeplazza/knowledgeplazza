@@ -1,6 +1,4 @@
 {
-  "host": "localhost",
-  "port": 8080,
   "nedb": "../data/",
   "public": "../dist/",
   "auth": {

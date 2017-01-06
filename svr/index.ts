@@ -4,7 +4,7 @@ import app from './app';
 
 // normalize path becuase sendfile does not like .. in paths
 const dist = path.normalize(app.get('public'));
-const port = app.get('port');
+const port = process.env.port || 8080;
 
 app.use(express.static(dist));
 
@@ -16,7 +16,7 @@ app.get('*', (req, res) => {
 const server = app.listen(port);
 
 server.on('listening', () => {
-  console.log(`Feathers application started on ${app.get('host')}:${port}`);
+  console.log(`Feathers application started on ${port}`);
 });
 
 // log errors
