@@ -10,7 +10,7 @@
     "svr:build": "tsc --project ./svr",
     "start": "node ./svr-output",
     "build": "npm run app:build & npm run svr:build",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "npm run svr:build",
     "lint": "tslint \"src/**/*.ts\" \"svr/**/*.ts\""
   },
   "private": true,
@@ -35,7 +35,6 @@
     "@types/socket.io": "^1.4.27",
     "@types/socket.io-client": "^1.4.29",
     "@types/winston": "0.0.32",
-    "angular-cli": "1.0.0-beta.24",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "core-js": "^2.4.1",
@@ -65,6 +64,7 @@
     "zone.js": "^0.7.4"
   },
   "devDependencies": {
+    "angular-cli": "1.0.0-beta.24",
     "codelyzer": "~2.0.0-beta.1",
     "concurrently": "^3.1.0",
     "forever": "^0.15.3",

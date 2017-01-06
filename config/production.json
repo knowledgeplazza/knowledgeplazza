@@ -1,11 +1,10 @@
 {
   "host": "localhost",
   "port": 80,
-  "nedb": "NEDB_BASE_PATH",
+  "nedb": "../data/",
   "public": "../dist/",
   "auth": {
     "token": {
-      "secret": "FEATHERS_AUTH_SECRET"
     },
     "local": {
       "usernameField": "username"
