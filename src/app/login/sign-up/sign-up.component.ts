@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoginService } from '^server/login.service';
+import { LoginService } from 'app/server/login.service';
 
 @Component({
   selector: 'app-sign-up',

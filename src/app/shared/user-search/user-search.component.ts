@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
-import { UserService } from '^server/user.service';
+import { UserService } from 'app/server/user.service';
 import { User } from 'models/user';
 
 @Component({

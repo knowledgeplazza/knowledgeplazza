@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Group } from 'models/group';
 import { User } from 'models/user';
 
-import { FeathersService } from '^server/feathers.service';
+import { FeathersService } from 'app/server/feathers.service';
 
 @Injectable()
 export class GroupsService extends FeathersService<Group> {

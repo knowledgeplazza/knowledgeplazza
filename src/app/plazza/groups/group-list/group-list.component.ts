@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Group } from 'models/group';
 import { GroupsService } from '../groups.service';
 
-import { BattlesService } from '^battles/battles.service';
+import { BattlesService } from 'app/battles/battles.service';
 
 @Component({
   selector: 'app-groups-list',

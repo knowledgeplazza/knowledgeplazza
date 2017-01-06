@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { FeathersService } from '^server/feathers.service';
+import { FeathersService } from 'app/server/feathers.service';
 
 export class ArchiveItem {
   name: string;

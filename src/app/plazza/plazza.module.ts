@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from '^shared/shared.module';
-import { QuestionModule } from '^question/question.module';
+import { SharedModule } from 'app/shared/shared.module';
+import { QuestionModule } from 'app/question/question.module';
 import { ArchiveModule } from './archive/archive.module';
 import { GroupsModule } from './groups/groups.module';
 

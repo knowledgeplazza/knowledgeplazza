@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from '^shared/shared.module';
+import { SharedModule } from 'app/shared/shared.module';
 
 import { QuestionComponent } from './question.component';
 import { QuestionBrowserComponent } from './question-browser/question-browser.component';

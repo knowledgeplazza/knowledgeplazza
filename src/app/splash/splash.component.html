@@ -3,7 +3,7 @@
     <div fxLayout="column" style="margin: 20px">
       <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="10px">
         <button md-raised-button [routerLink]="['/login']">Sign In</button>
-        <button md-raised-button [routerLink]="['/b']">Battle Now</button>
+        <button md-raised-button (click)="battlesService.battleNow()">Battle Now</button>
       </div>
 
       <app-question (answerChosen)="answerChosen()"></app-question>

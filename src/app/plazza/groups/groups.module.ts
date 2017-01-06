@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { SharedModule } from '^shared/shared.module';
+import { SharedModule } from 'app/shared/shared.module';
 
 import { GroupsService } from './groups.service';
 

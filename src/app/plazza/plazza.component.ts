@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-plazza',
   templateUrl: './plazza.component.html',
-  styleUrls: ['./plazza.component.scss']
+  styleUrls: ['./plazza.component.scss'],
 })
 export class PlazzaComponent implements OnInit {
   tabLinks = [

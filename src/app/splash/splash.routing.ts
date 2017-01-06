@@ -2,7 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { SplashComponent } from './splash.component';
-import { QuestionFormComponent } from '^question/question-form/question-form.component';
+import { QuestionFormComponent } from 'app/question/question-form/question-form.component';
 
 const splashRoutes: Routes = [
   {

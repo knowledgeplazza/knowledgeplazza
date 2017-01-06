@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { FeathersService } from '^server/feathers.service';
+import { FeathersService } from 'app/server/feathers.service';
 import { Question } from 'models/question';
 import { QuestionCheckData } from 'models/question-check';
 

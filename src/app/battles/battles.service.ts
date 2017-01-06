@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Battle } from 'models/battle';
 
-import { FeathersService } from '^server/feathers.service';
+import { FeathersService } from 'app/server/feathers.service';
 
 @Injectable()
 export class BattlesService extends FeathersService<Battle> {
@@ -13,7 +13,7 @@ export class BattlesService extends FeathersService<Battle> {
   }
 
   public battleNow() {
-    this.router.navigate(['/b']);
+    this.router.navigate(['/b', { now: true }]);
   }
 
 }

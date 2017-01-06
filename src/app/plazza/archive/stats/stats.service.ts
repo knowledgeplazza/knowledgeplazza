@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import { FeathersService } from '^server/feathers.service';
-import { UserService } from '^server/user.service';
+import { FeathersService } from 'app/server/feathers.service';
+import { UserService } from 'app/server/user.service';
 
 import { Stat } from 'models/stat';
 import { User } from 'models/user';

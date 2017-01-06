@@ -3,6 +3,8 @@ import { MediaMonitor } from '@angular/flex-layout';
 import { MdSnackBar, MdSnackBarConfig, MdSnackBarRef } from '@angular/material';
 import { Router } from '@angular/router';
 
+import { BattlesService } from 'app/battles/battles.service';
+
 @Component({
   selector: 'app-splash',
   templateUrl: './splash.component.html',
@@ -11,7 +13,13 @@ import { Router } from '@angular/router';
 export class SplashComponent implements OnInit {
   private ref: MdSnackBarRef<any>;
 
-  constructor(private snackBar: MdSnackBar, private router: Router, private monitor: MediaMonitor) { }
+  constructor(
+    private snackBar: MdSnackBar,
+    private router: Router,
+    private monitor: MediaMonitor,
+    private battlesService: BattlesService,
+  ) { }
+
   answerChosen() {
     if (this.ref) { this.ref.dismiss(); };
 

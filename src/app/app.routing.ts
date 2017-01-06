@@ -1,7 +1,7 @@
 import { ModuleWithProviders } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { RedirectHome } from '^server/login.guard';
+import { RedirectHome } from 'app/server/login.guard';
 import { AppComponent } from './app.component';
 
 const appRoutes: Routes = [

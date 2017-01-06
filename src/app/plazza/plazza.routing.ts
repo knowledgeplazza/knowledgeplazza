@@ -1,11 +1,11 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CanActivatePlazza } from '^server/login.guard';
+import { CanActivatePlazza } from 'app/server/login.guard';
 
 import { PlazzaComponent } from './plazza.component';
 import { ArchiveComponent } from './archive/archive.component';
-import { QuestionBrowserComponent } from '^question/question-browser/question-browser.component';
-import { QuestionAskerComponent } from '^question/question-asker/question-asker.component';
+import { QuestionBrowserComponent } from 'app/question/question-browser/question-browser.component';
+import { QuestionAskerComponent } from 'app/question/question-asker/question-asker.component';
 
 import { GroupDetailComponent } from './groups/group-detail/group-detail.component';
 import { GroupsListComponent } from './groups/group-list/group-list.component';
