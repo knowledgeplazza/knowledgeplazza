@@ -21,7 +21,7 @@
     <button md-raised-button (click)="battle()">Battle Now</button>
 
     <md-list-item (click)="openRecentBattle()" *ngFor="let recentBattle of battlesService.items | async; let i = index">
-        <a md-line>{{recentBattle.group.name}}</a>
+        <a md-line>{{recentBattle.name}}</a>
     </md-list-item>
 
 </md-nav-list>

@@ -3,6 +3,12 @@ import hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
 import utils = require('feathers-hooks-common/lib/utils');
 
+function calcName() {
+  return hook => {
+    hook.result.name = 'A battle';
+  };
+};
+
 export = {
   before: {
     all: [
@@ -22,8 +28,8 @@ export = {
   },
   after: {
     all: [],
-    find: [],
-    get: [],
+    find: [calcName()],
+    get: [calcName()],
     create: [],
     update: [],
     patch: [],
