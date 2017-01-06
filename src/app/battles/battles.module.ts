@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 
+import { SharedModule } from 'app/shared/shared.module';
+
 import { BattleComponent } from './battle.component';
 // BattlesService Provided in app.module
 // import { BattlesService } from './battles.service';
@@ -7,7 +9,7 @@ import { BattleComponent } from './battle.component';
 import { routing } from './battles.routing';
 
 @NgModule({
-  imports: [routing],
+  imports: [routing, SharedModule],
   exports: [],
   declarations: [BattleComponent],
   providers: [],
