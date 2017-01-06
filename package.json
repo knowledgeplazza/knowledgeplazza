@@ -14,6 +14,7 @@
     "start": "npm run app & npm run api",
     "start:watch": "npm run app:watch & npm run api:watch",
     "build": "npm run app:build & npm run api:build",
+    "build:c9": "npm run app:build:c9 & npm run api:build",
     "lint": "tslint \"src/**/*.ts\" \"api/**/*.ts\""
   },
   "private": true,
