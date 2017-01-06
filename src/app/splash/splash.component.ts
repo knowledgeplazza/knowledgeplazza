@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { MediaMonitor } from '@angular/flex-layout';
+import { MdSnackBar, MdSnackBarConfig, MdSnackBarRef } from '@angular/material';
 import { Router } from '@angular/router';
-import { MdSnackBar, MdSnackBarRef, MdSnackBarConfig } from '@angular/material';
-
 
 @Component({
   selector: 'app-splash',
   templateUrl: './splash.component.html',
-  styleUrls: ['./splash.component.scss']
+  styleUrls: ['./splash.component.scss'],
 })
 export class SplashComponent implements OnInit {
   private ref: MdSnackBarRef<any>;
 
-  constructor(private snackBar: MdSnackBar, private router: Router) { }
+  constructor(private snackBar: MdSnackBar, private router: Router, private monitor: MediaMonitor) { }
   answerChosen() {
     if (this.ref) { this.ref.dismiss(); };
 

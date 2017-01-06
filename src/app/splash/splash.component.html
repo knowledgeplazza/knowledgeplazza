@@ -1,5 +1,19 @@
-<button md-raised-button [routerLink]="['/login']">Sign In</button>
+<div fxLayout="row">
+  <div fxLayout="column" fxLayoutAlign="start center" fxFlex fxFlex.gt-xs="33%">
+    <div fxLayout="column" style="margin: 20px">
+      <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="10px">
+        <button md-raised-button [routerLink]="['/login']">Sign In</button>
+        <button md-raised-button [routerLink]="['/b']">Battle Now</button>
+      </div>
 
-<app-question (answerChosen)="answerChosen()"></app-question>
+      <app-question (answerChosen)="answerChosen()"></app-question>
+    </div>
+    <div *ngIf="monitor.isActive('xs')">
+      <app-about-us></app-about-us>
+    </div>
+  </div>
 
-<app-about-us></app-about-us>
+  <div *ngIf="!monitor.isActive('xs')">
+    <app-about-us></app-about-us>
+  </div>
+</div>
