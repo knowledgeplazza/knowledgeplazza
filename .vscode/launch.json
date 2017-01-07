@@ -5,17 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Program",
+            "name": "Launch API",
             "type": "node2",
             "request": "launch",
-            "program": "${workspaceRoot}/api-output/server.js",
-            "cwd": "${workspaceRoot}"
-        },
-        {
-            "name": "Attach to Process",
-            "type": "node2",
-            "request": "attach",
-            "port": 9229
+            "program": "${workspaceRoot}/api-output/index.js",
+            "cwd": "${workspaceRoot}",
+            "sourceMaps": true
         }
     ]
 }

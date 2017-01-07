@@ -6,46 +6,31 @@ export class Service {
   }
 
   find(params) {
-    return Promise.resolve([]);
+    return Promise.reject('only create is allowed on question-check');
   }
 
   get(id, params) {
-    return Promise.resolve({
-      id,
-      text: `A new message with ID: ${id}!`,
-    });
+    return Promise.reject('only create is allowed on question-check');
   }
 
   create(data, params) {
-    let questionId = data.questionId;
+    // calculate new stats before returning
+    data.stat = updateUserStats(this.app, params.user, data.isCorrect, data.question.category);
 
-    return this.app.service('questions').get(questionId).then(question => {
-      // TODO: real type
-      let returnData: any = {};
-
-      let isCorrect = (data.chosenAnswer === question.correctAnswer);
-      returnData.isCorrect = isCorrect;
-
-      // calculate new stats before returning
-      returnData.stat = updateUserStats(this.app, params.user, isCorrect, question.category);
-
-      returnData.correctAnswer = question.correctAnswer;
-
-      return returnData;
-    });
+    return Promise.resolve(data);
 
   }
 
   update(id, data, params) {
-    return Promise.resolve(data);
+    return Promise.reject('only create is allowed on question-check');
   }
 
   patch(id, data, params) {
-    return Promise.resolve(data);
+    return Promise.reject('only create is allowed on question-check');
   }
 
   remove(id, params) {
-    return Promise.resolve({ id });
+    return Promise.reject('only create is allowed on question-check');
   }
 }
 
