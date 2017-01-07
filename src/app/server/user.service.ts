@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+import { FeathersBatch } from 'models/batch';
 import { User } from 'models/user';
-import { FeathersBatch, FeathersService } from './feathers.service';
+
+import { FeathersService } from './feathers.service';
 
 @Injectable()
 export class UserService extends FeathersService<User> {
