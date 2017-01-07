@@ -30,7 +30,36 @@ export class LoginService extends FeathersService<any> {
     });
   }
 
-  /// helper method to call feathers 'authenticate' method, convert the result to a boolean, and update authStatus
+  public login(username: string, password: string): Promise<boolean> {
+    return this.authenticate({
+      type: 'local',
+      username,
+      password,
+    });
+  }
+
+  public createUser(username: string, password: string) {
+    return this.create({
+      username,
+      password,
+    }).first()
+    .switchMap(() => {
+      return this.login(username, password);
+    });
+  }
+
+  public logout() {
+    this.app.logout(); // tell feathers to delete auth token
+    this.authStatus.next(false);
+  }
+
+  /// Returns an observable that resolves to true or false
+  public isLoggedIn(): Observable<boolean> {
+    // returns authStatus.first(), so it completes immediately with the most recent value
+    return this.authStatus.first();
+  }
+
+    /// helper method to call feathers 'authenticate' method, convert the result to a boolean, and update authStatus
   private authenticate(params?: any): Promise<boolean> {
     let authStatus = this.authStatus; // allows authStatus to be captured by arrow function
 
@@ -44,33 +73,4 @@ export class LoginService extends FeathersService<any> {
     });
   }
 
-  public login(username: string, password: string): Promise<boolean> {
-    return this.authenticate({
-      type: 'local',
-      'username': username,
-      'password': password,
-    });
-  }
-
-  public createUser(username: string, password: string) {
-    return this.create({
-      username: username,
-      password: password,
-    }).first()
-    .switchMap(() => {
-      return this.login(username, password);
-    });
-  }
-
-
-  public logout() {
-    this.app.logout(); // tell feathers to delete auth token
-    this.authStatus.next(false);
-  }
-
-  /// Returns an observable that resolves to true or false
-  public isLoggedIn(): Observable<boolean> {
-    // returns authStatus.first(), so it completes immediately with the most recent value
-    return this.authStatus.first();
-  }
 }
