@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
+import { FeathersBatch } from 'models/batch';
 import { feathersCore } from './feathers.core';
-
-export class FeathersBatch<T> {
-  public total: number;
-  public limit: number;
-  public skip: number;
-  public data: T[];
-}
 
 @Injectable()
 export class FeathersService<T> implements Resolve<Observable<T>> {
@@ -42,36 +36,13 @@ export class FeathersService<T> implements Resolve<Observable<T>> {
 
   }
 
-  /// get the shared feathers app
-  protected get app() {
-    return this._app;
-  }
-
-  protected get socket() {
-    return this._socket;
-  }
-
-  protected get user() {
-    return this.app.get('user');
-  }
-
-    /// checks if value from this.app.get() is not undefined
-  protected exists(key: string): boolean {
-    let value = this.app.get(key);
-    if (value === undefined) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   // FEATHERS STUFF
 
-  private handleError(operation: string) {
-    return (error) => {
-      console.error(this.serviceName + '.' + operation, error);
-    };
-  }
+  // private handleError(operation: string) {
+  //   return error => {
+  //     console.error(this.serviceName + '.' + operation, error);
+  //   };
+  // }
 
   /// Shortcut for accessing items
   get items() {
@@ -80,17 +51,16 @@ export class FeathersService<T> implements Resolve<Observable<T>> {
 
   /// GET /messages
   find(query?: any): Observable<FeathersBatch<T>> {
-    return this.service.find({ query: query });
+    return this.service.find({ query });
   }
 
   /// GET /messages and choose a random item
   random(query?: any): Observable<T> {
     query.$random = 1;
-    return this.service.find({ query: query }).map(values => {
+    return this.find(query).map(values => {
       return values[0]; // find with random returns an array, we just want the first item
     });
   }
-
 
   /// GET /messages/<id>
   get(id: any, params?: any): Observable<T> {
@@ -117,7 +87,6 @@ export class FeathersService<T> implements Resolve<Observable<T>> {
     return this.service.remove(id, params);
   }
 
-
   /// get a feathers service object
   getService(name: string) {
     return this.app.service(name);
@@ -133,6 +102,29 @@ export class FeathersService<T> implements Resolve<Observable<T>> {
     let id = route.params['id'];
 
     return Promise.resolve(this.get(id));
+  }
+
+    /// get the shared feathers app
+  protected get app() {
+    return this._app;
+  }
+
+  protected get socket() {
+    return this._socket;
+  }
+
+  protected get user() {
+    return this.app.get('user');
+  }
+
+    /// checks if value from this.app.get() is not undefined
+  protected exists(key: string): boolean {
+    let value = this.app.get(key);
+    if (value === undefined) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 }
