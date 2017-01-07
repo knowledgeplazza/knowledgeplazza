@@ -16,6 +16,6 @@ export class QuestionCheckService extends FeathersService<QuestionCheckData> {
     return this.create({
       questionId: question._id,
       chosenAnswer,
-    });
+    }).first();
   }
 }
