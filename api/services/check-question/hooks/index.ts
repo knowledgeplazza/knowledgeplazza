@@ -1,6 +1,7 @@
 import globalHooks = require('../../../hooks');
 import hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
+import { updateStat } from '../../../hooks/stat';
 
 const populateSchema = {
   include: [
@@ -45,7 +46,7 @@ export = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [updateStat('user', 'user')],
     update: [],
     patch: [],
     remove: [],

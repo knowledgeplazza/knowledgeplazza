@@ -1,37 +1,15 @@
 import hooks = require('./hooks');
-import { updateUserStats } from '../stat/hooks/stat';
 
 export class Service {
   constructor(private app) {
   }
 
-  find(params) {
-    return Promise.reject('only create is allowed on question-check');
-  }
-
-  get(id, params) {
-    return Promise.reject('only create is allowed on question-check');
-  }
-
+  // check question only needs 'create'
   create(data, params) {
-    // calculate new stats before returning
-    data.stat = updateUserStats(this.app, params.user, data.isCorrect, data.question.category);
-
+    // nothing to acutually do here, all handled by hooks
     return Promise.resolve(data);
-
   }
 
-  update(id, data, params) {
-    return Promise.reject('only create is allowed on question-check');
-  }
-
-  patch(id, data, params) {
-    return Promise.reject('only create is allowed on question-check');
-  }
-
-  remove(id, params) {
-    return Promise.reject('only create is allowed on question-check');
-  }
 }
 
 module.exports = function(){

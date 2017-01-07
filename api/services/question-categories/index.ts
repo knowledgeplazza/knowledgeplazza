@@ -20,26 +20,6 @@ export class Service {
 
     return this.questionCategories;
   }
-
-  get(id, params) {
-    return null;
-  }
-
-  create(data, params) {
-    return null;
-  }
-
-  update(id, data, params) {
-    return Promise.resolve(data);
-  }
-
-  patch(id, data, params) {
-    return null;
-  }
-
-  remove(id, params) {
-    return null;
-  }
 }
 
 module.exports = function(){
