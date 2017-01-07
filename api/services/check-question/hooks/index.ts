@@ -46,7 +46,7 @@ export = {
     all: [],
     find: [],
     get: [],
-    create: [updateStat('user', 'user')],
+    create: [updateStat('users', 'user')],
     update: [],
     patch: [],
     remove: [],
