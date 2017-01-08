@@ -1,6 +1,7 @@
 import globalHooks = require('../../../hooks');
 import hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
+import { updateUnlockCountdown } from '../../../hooks/archive-item';
 import { updateStat } from '../../../hooks/stat';
 
 export = {
@@ -42,6 +43,7 @@ export = {
         // create/update battle stat entry if we get passed a battle id  
         updateStat('battle-stats', 'battleId', 'battle'),
       ),
+      updateUnlockCountdown(),
     ],
     update: [],
     patch: [],
