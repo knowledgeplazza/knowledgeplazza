@@ -1,7 +1,6 @@
 import globalHooks = require('../hooks');
 
-const setByDot = require('feathers-hooks-common/lib/utils').setByDot;
-const getByDot = require('feathers-hooks-common/lib/utils').getByDot;
+import { getByDot, setByDot } from '../hooks';
 
 import hooks = require('feathers-hooks-common');
 

@@ -6,7 +6,9 @@
 
 import _ = require('lodash');
 import hooks = require('feathers-hooks-common');
-import utils = require('feathers-hooks-common/lib/utils');
+import { getByDot, setByDot } from './helper';
+
+export * from './helper';
 
 export function requireString(property) {
   return hook => {
@@ -38,29 +40,14 @@ export function getRandom(options) {
   };
 };
 
-// shortcut for hooks.populate({schema: {include: []}})
-export function include(list: any[] | any) {
-  if (Array.isArray(list)) {
-    return hooks.populate({schema: {include: list}});
-  } else {
-    // not passed an array, so wrap in one 
-    return hooks.populate({schema: {include: [list]}});
-  }
-}
-
-// shortcut for hooks.serialize({computed: {}})
-export function compute(values: any) {
-  return hooks.serialize({ computed: values });
-}
-
 /// Make sure that the values in an array are unique
 /// Options: {path: **pathToGetArrayFrom**, uniqueBy: **valueOfObjectsInArrayToCompare}
 export function enforceUnique(path: string, uniqueBy?: string) {
   if (!uniqueBy) { uniqueBy = '_id'; }
 
   return hook => {
-    const values = utils.getByDot(hook.data, path);
-    utils.setByDot(hook.data, path, _.uniqBy(values, uniqueBy));
+    const values = getByDot(hook.data, path);
+    setByDot(hook.data, path, _.uniqBy(values, uniqueBy));
     return hook;
   };
 };

@@ -1,7 +1,6 @@
 import globalHooks = require('../../../hooks');
 import hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
-import utils = require('feathers-hooks-common/lib/utils');
 
 function calcName() {
 
