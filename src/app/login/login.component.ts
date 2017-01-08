@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { LoginService } from 'app/server/login.service';
@@ -6,27 +7,27 @@ import { LoginService } from 'app/server/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   private username: string;
   private password: string;
 
-  private loginError = false;
-
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private snackBar: MdSnackBar) { }
 
   ngOnInit() {
 
   }
 
   login() {
-    this.loginService.login(this.username, this.password).then((value) => {
-      this.router.navigate(['/plazza']); // navigate to plazza
-      this.loginError = false;
-    }).catch((reason) => {
-      this.loginError = true;
-      console.log('Login Error');
+    this.loginService.login(this.username, this.password).then(success => {
+      if (success) {
+        this.router.navigate(['/plazza']); // navigate to plazza
+      } else {
+        let config = new MdSnackBarConfig();
+        config.duration = 2000;
+        this.snackBar.open('Couldn\'t Log In', null);
+      }
     });
   }
 
