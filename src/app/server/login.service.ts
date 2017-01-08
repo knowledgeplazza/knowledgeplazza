@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { MdSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -13,7 +15,7 @@ export class LoginService extends FeathersService<any> {
   // and will replay the most recent value to new subscribers
   public authStatus = new ReplaySubject<boolean>(1);
 
-  constructor() {
+  constructor(private router: Router, private snackBar: MdSnackBar) {
     super('users');
 
     // authenticate immediately using stored token
