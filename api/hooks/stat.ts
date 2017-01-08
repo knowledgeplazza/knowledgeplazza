@@ -16,7 +16,7 @@ export function updateStat(
             childField,
         }),
         createStat(service, childField, parentField), // or create it if it doesn't exist
-        incrementStat(service, childField, isCorrectFeild, categoryField), // increment the counts in the stat 
+        incrementStat(service, childField, categoryField, isCorrectFeild), // increment the counts in the stat 
         hook => {
             // commit new stat to the database
             let newStat = hook.data.stat;
