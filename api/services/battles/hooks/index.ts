@@ -2,6 +2,9 @@ import globalHooks = require('../../../hooks');
 import hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
 
+const ownerField = 'owner';
+const idField = '_id';
+
 function calcName() {
 
   return hooks.serialize({
@@ -18,11 +21,11 @@ export = {
       auth.populateUser(),
       auth.restrictToAuthenticated(),
     ],
-    find: [],
+    find: [auth.queryWithCurrentUser({ idField, as: ownerField })],
     get: [],
     create: [
       hooks.setCreatedAt(),
-      auth.associateCurrentUser({ idField: '_id', as: 'owner' }),
+      auth.associateCurrentUser({ idField, as: ownerField }),
     ],
     update: [],
     patch: [],
