@@ -1,6 +1,7 @@
 import stat = require('./stat');
 import checkQuestion = require('./check-question');
 import battles = require('./battles');
+import battleStat = require('./battle-stat');
 import questions = require('./questions');
 import questionCategories = require('./question-categories');
 import groups = require('./groups');
@@ -20,4 +21,5 @@ module.exports = function() {
   app.configure(battles);
   app.configure(checkQuestion);
   app.configure(stat);
+  app.configure(battleStat);
 };
