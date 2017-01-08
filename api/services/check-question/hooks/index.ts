@@ -3,31 +3,6 @@ import hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
 import { updateStat } from '../../../hooks/stat';
 
-const populateSchema = {
-  include: [
-    {
-      service: 'questions',
-      nameAs: 'question',
-      parentField: 'questionId',
-      childField: '_id',
-      query: {
-        $select: ['correctAnswer', 'category'],
-      },
-    },
-  ],
-};
-
-const serializeSchema = {
-  computed: {
-    isCorrect: (item, hook) => {
-      return item.chosenAnswer === +item.question.correctAnswer;
-    },
-    correctAnswer: (item, hook) => {
-      return +item.question.correctAnswer;
-    },
-  },
-};
-
 export = {
   before: {
     all: [
@@ -37,7 +12,22 @@ export = {
     ],
     find: [],
     get: [],
-    create: [hooks.populate({schema: populateSchema}), hooks.serialize(serializeSchema)],
+    create: [
+      auth.associateCurrentUser({ idField: '_id', as: 'user' }), // get current user so we can do user stats
+      globalHooks.include({
+        service: 'questions',
+        nameAs: 'question',
+        parentField: 'questionId', // the property in the hooks data
+        childField: '_id', // the property in the data we're trying to get from service
+        query: {
+          $select: ['correctAnswer', 'category'],
+        },
+      }),
+      globalHooks.compute({
+        isCorrect: (item, hook) => item.chosenAnswer === item.question.correctAnswer,
+        correctAnswer: (item, hook) => item.question.correctAnswer,
+      }),
+    ],
     update: [],
     patch: [],
     remove: [],
@@ -46,7 +36,13 @@ export = {
     all: [],
     find: [],
     get: [],
-    create: [updateStat('users', 'user')],
+    create: [
+      updateStat('stats', 'user', 'user'),
+      hooks.iff(hook => hook.data.battle,
+        // create/update battle stat entry if we get passed a battle id  
+        updateStat('battle-stats', 'battleId', 'battle'),
+      ),
+    ],
     update: [],
     patch: [],
     remove: [],

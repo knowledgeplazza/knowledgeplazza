@@ -1,53 +1,53 @@
+import globalHooks = require('../hooks');
+
 const setByDot = require('feathers-hooks-common/lib/utils').setByDot;
 const getByDot = require('feathers-hooks-common/lib/utils').getByDot;
 
 import hooks = require('feathers-hooks-common');
 
 export function updateStat(
-    service: string, parentField: string,
+    service: string, childField: string, parentField: string,
     categoryField = 'question.category', isCorrectFeild = 'isCorrect') {
     return hooks.combine(
-        hooks.populate(statPopulate(service, parentField)),
-        createStat(service, parentField),
-        incrementStat(service, parentField, isCorrectFeild, categoryField),
+        globalHooks.include({ // populate the current stat
+            service,
+            nameAs: 'stat',
+            parentField,
+            childField,
+        }),
+        createStat(service, childField, parentField), // or create it if it doesn't exist
+        incrementStat(service, childField, isCorrectFeild, categoryField), // increment the counts in the stat 
+        hook => {
+            // commit new stat to the database
+            let newStat = hook.data.stat;
+            hook.app.service(service).patch(newStat._id, newStat);
+        },
     );
     }
-
-export function statPopulate(service: string, parentField: string) {
-    return {
-        include: [
-            {
-                service,
-                parentField,
-                childField: '_id',
-            },
-        ],
-    };
-};
 
 /// takes the stat object in the hook data and updates it, 
 /// or 
 /// note that this must be folowed with a patch to save the new stats?
 export function incrementStat(
-    service: string, parentField: string,
+    service: string, childField: string,
     categoryField = 'question.category', isCorrectFeild = 'isCorrect') {
-    return function (hook) {
+    return hook => {
         let data = hook.data;
-        let currentStat = hook.data.stat;
 
         let isCorrect = getByDot(data, isCorrectFeild);
         let category = getByDot(data, categoryField);
 
-        let newStat = calculateNewStat(currentStat, isCorrect, category);
+        hook.data.stat = calculateNewStat(data.stat, isCorrect, category);
+        return hook;
     };
 }
 
 /// creates a stat object if one doesn't exist in the hooks data 
-/// and sets the parentField to the _id of the hook data object
-export function createStat(service: string, parentField: string) {
+/// and sets the childField to the value of parentField in the hook data object
+export function createStat(service: string, childField: string, parentField: string) {
     return hook => {
         if (!hook.data.stat) {
-            return hook.app.service(service).create({ [parentField]: hook.data._id }).then(stat => {
+            return hook.app.service(service).create({ [childField]: getByDot(hook.data, parentField) }).then(stat => {
                 hook.data.stat = stat;
 
                 return hook;
@@ -55,22 +55,6 @@ export function createStat(service: string, parentField: string) {
         }
     };
 }
-
-// export function updateUserStats(app, user, correct, category) {
-//     app.service('stats').find({
-//         user: user._id,
-//     }).then(batch => {
-//         return batch.data[0];
-//     }).then(stat => {
-//         if (stat) {
-//             let newStat = calculateNewStat(stat, correct, category);
-//             app.service('stats').patch(newStat._id, newStat);
-//         } else {
-//             let firstStat = calculateNewStat({user: user._id}, correct, category);
-//             app.service('stats').create(firstStat);
-//         }
-//     });
-// }
 
 function calculateNewStat(stat, isCorrect: boolean, category?: string) {
     if (isCorrect) {
