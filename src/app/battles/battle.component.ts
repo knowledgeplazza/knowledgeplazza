@@ -11,6 +11,7 @@ import { Battle } from 'models/battle';
 })
 export class BattleComponent implements OnInit {
   public battle: Battle;
+  public url: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -23,10 +24,11 @@ export class BattleComponent implements OnInit {
       return this.battlesService.get(params['id']);
     }).subscribe(battle => {
       this.battle = battle;
-      });
-  }
+    });
 
-  getBattleUrl() {
-   return window.URL;
+    // this.activatedRoute.root;
+    //   url.subscribe(url => {
+    //   this.url = url.toString();
+    // });
   }
 }
