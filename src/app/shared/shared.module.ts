@@ -1,19 +1,20 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdSnackBar, MaterialModule } from '@angular/material';
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule, MdSnackBar } from '@angular/material';
 
-import { UserSearchComponent } from './user-search/user-search.component';
 import { AssetDirective } from './asset.directive';
 import { AsyncPipe } from './async.pipe';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { UserSearchComponent } from './user-search/user-search.component';
 
 @NgModule({
     imports: [
         CommonModule,
         MaterialModule,
         ReactiveFormsModule,
-        FlexLayoutModule
+        FlexLayoutModule,
     ],
     exports: [
         CommonModule,
@@ -21,10 +22,11 @@ import { AsyncPipe } from './async.pipe';
         FlexLayoutModule,
         ReactiveFormsModule,
         UserSearchComponent,
+        LeaderboardComponent,
         AssetDirective,
-        AsyncPipe
+        AsyncPipe,
     ],
-    declarations: [UserSearchComponent, AssetDirective, AsyncPipe],
+    declarations: [UserSearchComponent, AssetDirective, AsyncPipe, LeaderboardComponent],
     providers: [MdSnackBar],
 })
 export class SharedModule { }
