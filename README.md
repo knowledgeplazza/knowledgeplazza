@@ -4,8 +4,7 @@ The Wizzard Lizzard's 2017 CodeTN Project
 Run `npm run build` and `npm start` to get started
 
 __Notes for cloud9__
-You must run `npm run app:build:c9` or `npm run build:c9` to tell the app to load data from the c9 workspace
-Building the app takes forever on cloud9, so you might want to just skip building
+Building the app takes forever on cloud9, so you might want to just skip building (`npm start`)
 
 ### Setup
 To run this project on a personal computer, setup your computer using these steps:
