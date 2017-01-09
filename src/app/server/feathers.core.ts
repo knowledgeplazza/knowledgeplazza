@@ -19,7 +19,7 @@ export class FeathersCore {
   private _app: any;
 
   constructor() {
-    this._socket = io(HOST);
+    this._socket = io(HOST, {secure: false});
 
     this._app = feathers()
       .configure(socketio(this.socket))
