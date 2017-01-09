@@ -43,29 +43,58 @@ export function getRandom(options) {
 /// Make sure that the values in an array are unique
 /// Options: {path: **pathToGetArrayFrom**, uniqueBy: **valueOfObjectsInArrayToCompare}
 export function enforceUnique(path: string, uniqueBy?: string) {
-  if (!uniqueBy) { uniqueBy = '_id'; }
+  if (!uniqueBy) {
+    return hook => {
+      const values = getByDot(hook.data, path);
+      setByDot(hook.data, path, _.uniq(values));
+      return hook;
+    };
+   } else {
+    return hook => {
+      const values = getByDot(hook.data, path);
+      setByDot(hook.data, path, _.uniqBy(values, uniqueBy));
+      return hook;
+    };
+   }
+};
 
+export function searchRegex(flags) {
+  return specialField('$search', (query, value, fieldIn) => {
+    try {
+      let expr = new RegExp(value, flags);
+      query[fieldIn] = { $regex: expr };
+    } catch (error) {
+      query[fieldIn] = {};
+    }
+    return query;
+  });
+};
+
+/**
+ * Shortcut for creating a special field hook
+ * 
+ * @export
+ * @param {string} specialField
+ * @param {function} callback called every time specialField is found in query
+ */
+export function specialField(specialField: string, callback: (query, value, fieldIn, hook?) => any) {
   return hook => {
-    const values = getByDot(hook.data, path);
-    setByDot(hook.data, path, _.uniqBy(values, uniqueBy));
+    const query = hook.params.query;
+    for (let field in query) {
+      if (query[field][specialField] && field.indexOf('$') === -1) {
+
+        let value = query[field][specialField];
+
+        hook.params.query = callback(query, value, field, hook);
+      }
+    }
     return hook;
   };
 };
 
-export function searchRegex(flags) {
-  return hook => {
-    const query = hook.params.query;
-    for (let field in query) {
-      if (query[field].$search && field.indexOf('$') === -1) {
-        try {
-          let expr = new RegExp(query[field].$search, flags);
-          query[field] = { $regex: expr };
-        } catch (error) {
-          query[field] = {};
-        }
-      }
-    }
-    hook.params.query = query;
-    return hook;
-  };
+export function append() {
+  return specialField('$append', (query, value, fieldIn) => {
+    
+    return query;
+  });
 };

@@ -1,4 +1,4 @@
-import { enforceUnique, requireString } from '../../../hooks';
+import { enforceUnique, include, requireString } from '../../../hooks';
 import hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
 
@@ -19,20 +19,29 @@ export = {
     create: [
       requireString('name'),
       auth.associateCurrentUser({ idField, as: ownerField }),
-      enforceUnique('members'),
+      enforceUnique('memberIds'),
     ],
     update: [
       auth.restrictToOwner({ idField,  ownerField }),
-      enforceUnique('members'),
+      enforceUnique('memberIds'),
     ],
     patch: [
       auth.restrictToOwner({ idField,  ownerField }),
-      enforceUnique('members'),
+      enforceUnique('memberIds'),
     ],
     remove: [auth.restrictToOwner({ idField,  ownerField })],
   },
   after: {
-    all: [],
+    all: [include({
+      service: 'users',
+      nameAs: 'members',
+      parentField: 'memberIds',
+      childField: '_id',
+      query: {
+        $select: ['_id', 'username'],
+      },
+      asArray: true,
+    })],
     find: [],
     get: [],
     create: [],

@@ -13,20 +13,20 @@ export class GroupsService extends FeathersService<Group> {
     super('groups');
   }
 
-  create(name: string) {
-    return super.create({ name });
+  create(name: string, memberIds: string[] = []) {
+    return super.create({ name, memberIds });
   }
 
   addMember(group: Group, person: User) {
-    let members = group.members;
-    members.push(person);
-    return super.patch(group._id, { members });
+    let memberIds = group.memberIds;
+    memberIds.push(person._id);
+    return super.patch(group._id, { memberIds });
   }
 
   removeAt(group: Group, index: number) {
-    let members = group.members;
-    members.splice(index, 1);
-    return super.patch(group._id, { members });
+    let memberIds = group.memberIds;
+    memberIds.splice(index, 1);
+    return super.patch(group._id, { memberIds });
   }
 
 }
