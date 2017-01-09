@@ -23,6 +23,10 @@ export class BattleComponent implements OnInit {
       return this.battlesService.get(params['id']);
     }).subscribe(battle => {
       this.battle = battle;
-    });
+      });
+  }
+
+  getBattleUrl() {
+   return window.URL;
   }
 }
