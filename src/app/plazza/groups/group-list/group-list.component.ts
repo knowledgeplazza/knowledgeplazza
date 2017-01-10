@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { Group } from 'models/group';
+import { User } from 'models/user';
 import { GroupsService } from '../groups.service';
 
 import { BattlesService } from 'app/battles/battles.service';
@@ -27,9 +28,9 @@ export class GroupsListComponent implements OnInit {
     return this.groupsService.items;
   }
 
-  addGroup() {
+  addGroup(member: User) {
     this.groupsService
-      .create('UnnamedGroup')
+      .create('UnnamedGroup', [member])
       .take(1)
       .subscribe((newGroup: Group) => {
         this.openGroup(newGroup._id);
@@ -38,6 +39,10 @@ export class GroupsListComponent implements OnInit {
 
   openGroup(id: string) {
     this.router.navigate(['../group', id], {relativeTo: this.route});
+  }
+
+  openRecentBattle(recentBattle) {
+    this.router.navigate(['/b', recentBattle._id]);
   }
 
   battle() {

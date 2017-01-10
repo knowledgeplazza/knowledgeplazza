@@ -5,15 +5,10 @@ import { getByDot, setByDot } from '../hooks';
 import hooks = require('feathers-hooks-common');
 
 export function updateStat(
-    service: string, childField: string, parentField: string,
+    service = 'stats', childField = 'user', parentField = 'user',
     categoryField = 'question.category', isCorrectFeild = 'isCorrect') {
     return hooks.combine(
-        globalHooks.include({ // populate the current stat
-            service,
-            nameAs: 'stat',
-            parentField,
-            childField,
-        }),
+        populateStat(service, parentField, childField), // populate current stat
         createStat(service, childField, parentField), // or create it if it doesn't exist
         incrementStat(service, childField, categoryField, isCorrectFeild), // increment the counts in the stat 
         hook => {
@@ -22,7 +17,17 @@ export function updateStat(
             hook.app.service(service).patch(newStat._id, newStat);
         },
     );
-    }
+}
+
+export function populateStat(
+    service = 'stats', childField = 'user', parentField = 'user') {
+    return globalHooks.include({ // populate the current stat
+        service,
+        nameAs: 'stat',
+        parentField,
+        childField,
+    });
+}
 
 /// takes the stat object in the hook data and updates it, 
 /// or 

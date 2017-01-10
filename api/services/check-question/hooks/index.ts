@@ -38,7 +38,7 @@ export = {
     find: [],
     get: [],
     create: [
-      updateStat('stats', 'user', 'user'),
+      updateStat(),
       hooks.iff(hook => hook.data.battle,
         // create/update battle stat entry if we get passed a battle id  
         updateStat('battle-stats', 'battleId', 'battle'),
