@@ -24,7 +24,7 @@ export class FeathersService<T> implements Resolve<Observable<T>> {
     this._app = feathersCore.app;
 
     this._items = Observable.defer(() => {
-      return this.find(); // Find all items on first subscribe
+      return this.find({}); // Find all items on first subscribe
     }).map(value => {
       if (value.data) {
         return value.data; // Value is a batch: Map to the data

@@ -1,5 +1,8 @@
 <md-nav-list>
     <md-list-item (click)="showQuestion(category)" *ngFor="let category of categories | async">
         <h3>{{category.name}}</h3>
+        <div class="body">
+            {{ category.stat.correct }} / {{ category.stat.answeredCount }}
+        </div>
     </md-list-item>
 </md-nav-list>
