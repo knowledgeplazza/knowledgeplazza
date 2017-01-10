@@ -23,7 +23,7 @@ export class QuestionBrowserComponent implements OnInit {
 
   ngOnInit() {
     this.categoryService.items.subscribe(categories => {
-      this.categories = categories.sort((a, b) => a.percentCorrect < b.percentCorrect ? -1 : 0);
+      this.categories = categories.sort((a, b) => a.percentCorrect - b.percentCorrect);
     });
   }
 
