@@ -1,18 +1,9 @@
-import globalHooks = require('../../../hooks');
+import { compute } from '../../../hooks';
 import hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
 
 const ownerField = 'owner';
 const idField = '_id';
-
-function calcName() {
-
-  return hooks.serialize({
-    computed: {
-      name: () => 'A Battle',
-    },
-  });
-};
 
 export = {
   before: {
@@ -33,8 +24,8 @@ export = {
   },
   after: {
     all: [],
-    find: [calcName()],
-    get: [calcName()],
+    find: [compute({name: () => 'A Battle'})],
+    get: [compute({name: () => 'A Battle'})],
     create: [],
     update: [],
     patch: [],

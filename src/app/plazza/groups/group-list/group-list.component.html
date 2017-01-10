@@ -1,4 +1,4 @@
-<app-user-search></app-user-search>
+<app-user-search (userChosen)="addGroup($event)"></app-user-search>
 
 <md-nav-list>
     <md-list-item *ngFor="let group of groups | appAsync; let i = index">
@@ -20,7 +20,7 @@
 
     <button md-raised-button (click)="battle()">Battle Now</button>
 
-    <md-list-item (click)="openRecentBattle()" *ngFor="let recentBattle of battlesService.items | async; let i = index">
+    <md-list-item (click)="openRecentBattle(recentBattle)" *ngFor="let recentBattle of battlesService.items | async; let i = index">
         <a md-line>{{recentBattle.name}}</a>
     </md-list-item>
 

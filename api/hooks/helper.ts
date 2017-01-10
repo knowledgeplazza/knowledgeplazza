@@ -34,6 +34,22 @@ export function decrementByDot(obj, path: string) {
     return current <= 0;
 }
 
+
+/**
+ * Helper function to set result property on find/get hooks
+ * populate only works on property
+ * 
+ * @export
+ * @param {string} [path='params.query']
+ */
+export function populateResult(path = 'params.query') {
+  return hook => {
+    hook.result = Object.assign(hook.result, getByDot(hook, path));
+
+    return hook;
+  };
+}
+
 /**
  * shortcut for hooks.populate({schema: {include: []}})
  * 

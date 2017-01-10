@@ -13,7 +13,8 @@ export class GroupsService extends FeathersService<Group> {
     super('groups');
   }
 
-  create(name: string, memberIds: string[] = []) {
+  create(name: string, members: User[]) {
+    let memberIds = members.map(member => member._id);
     return super.create({ name, memberIds });
   }
 
