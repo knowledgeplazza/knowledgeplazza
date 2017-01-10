@@ -9,13 +9,12 @@ import * as reactive from 'feathers-reactive';
 import * as socketio from 'feathers-socketio/client';
 import * as io from 'socket.io-client';
 
-let HOST = 'http://'; // cloud9 doesn't like https
+let HOST;
 try {
-  HOST += window.location.hostname;
+  HOST = window.location.hostname;
 } catch (error) {
-  HOST += 'localhost';
+  HOST = 'localhost';
 };
-HOST += ':8081';
 
 @Injectable()
 export class FeathersCore {
