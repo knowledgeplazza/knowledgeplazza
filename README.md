@@ -7,7 +7,7 @@ __Notes for cloud9__
 #
 Run `npm run build` and `npm start` to get started
 
-### Setup
+### Setup ###
 To run this project on a personal computer, setup your computer using these steps:
 
 0. Clone the project from GitHub
