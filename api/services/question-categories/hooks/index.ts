@@ -13,13 +13,17 @@ export = {
         user: (item, hook) => hook.params.query.user,
       }),
       populateStat(),
-      hooks.serialize({
-        exclude: ['stat'], // get rid of the stat, we just need the category properties
-        computed: {
-          correct: item => item.stat.categories[item.name].correct,
-          answeredCount: item => item.stat.categories[item.name].answeredCount,
-        },
-      }),
+      // hooks.iff()
+      // hooks.serialize({
+      //   exclude: ['stat'], // get rid of the stat, we just need the category properties
+      //   computed: {
+      //     correct: item => item.stat.categories[item.name].correct,
+      //     percentCorrect: item => {
+      //       return item.stat.categories[item.name].correct / item.stat.categories[item.name].answeredCount;
+      //     },
+      //     answeredCount: item => item.stat.categories[item.name].answeredCount,
+      //   },
+      // }),
     ],
   },
 };

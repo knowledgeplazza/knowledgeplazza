@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Directive({
-  selector: '[appAsset]'
+  selector: '[appAsset]',
 })
 export class AssetDirective implements OnChanges {
   @Input() appAsset: string;

@@ -7,6 +7,8 @@ import { MaterialModule, MdSnackBar } from '@angular/material';
 import { AssetDirective } from './asset.directive';
 import { AsyncPipe } from './async.pipe';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { StatPercentComponent } from './stat-percent.component';
+import { StatComponent } from './stat.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 
 @NgModule({
@@ -23,10 +25,19 @@ import { UserSearchComponent } from './user-search/user-search.component';
         ReactiveFormsModule,
         UserSearchComponent,
         LeaderboardComponent,
+        StatComponent,
+        StatPercentComponent,
         AssetDirective,
         AsyncPipe,
     ],
-    declarations: [UserSearchComponent, AssetDirective, AsyncPipe, LeaderboardComponent],
+    declarations: [
+        UserSearchComponent,
+        AssetDirective,
+        AsyncPipe,
+        LeaderboardComponent,
+        StatComponent,
+        StatPercentComponent,
+    ],
     providers: [MdSnackBar],
 })
 export class SharedModule { }
