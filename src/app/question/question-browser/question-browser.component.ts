@@ -14,10 +14,7 @@ import { QuestionCategoryService } from '../question-category.service';
 })
 export class QuestionBrowserComponent implements OnInit {
 
-  private items = Observable.defer(() =>
-    // worst categories first 
-    this.categoryService.find({$sort: {percentCorrect: -1}}),
-  );
+  private categories;
 
   constructor(
     private categoryService: QuestionCategoryService,
@@ -25,10 +22,9 @@ export class QuestionBrowserComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-  }
-
-  get categories() {
-    return this.items;
+    this.categories = this.categoryService.find({
+      $sort: { percentCorrect: -1 },
+    });
   }
 
   showQuestion(category) {

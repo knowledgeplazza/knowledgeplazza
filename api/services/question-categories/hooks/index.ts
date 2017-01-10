@@ -21,7 +21,8 @@ export = {
         exclude: ['userStats', 'user'], // get rid of the stat, we just need the category properties
         computed: {
           percentCorrect: item => {
-            return item.stat ? item.correct / item.answeredCount : 0;
+            let stat = item.stat;
+            return stat ? stat.correct / stat.answeredCount : 0;
           },
         },
       }),
