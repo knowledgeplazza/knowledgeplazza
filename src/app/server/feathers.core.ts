@@ -15,6 +15,7 @@ try {
 } catch (error) {
   HOST = 'localhost';
 };
+HOST += ':8080';
 
 @Injectable()
 export class FeathersCore {

@@ -12,18 +12,19 @@ export = {
       compute({
         user: (item, hook) => hook.params.query.user,
       }),
-      populateStat(),
-      // hooks.iff()
-      // hooks.serialize({
-      //   exclude: ['stat'], // get rid of the stat, we just need the category properties
-      //   computed: {
-      //     correct: item => item.stat.categories[item.name].correct,
-      //     percentCorrect: item => {
-      //       return item.stat.categories[item.name].correct / item.stat.categories[item.name].answeredCount;
-      //     },
-      //     answeredCount: item => item.stat.categories[item.name].answeredCount,
-      //   },
-      // }),
+      populateStat('stats', 'userStats'),
+      compute({
+        // stat for specific categories
+        stat: (item, hook) => item.userStats.categories[item.name],
+      }),
+      hooks.serialize({
+        exclude: ['userStats', 'user'], // get rid of the stat, we just need the category properties
+        computed: {
+          percentCorrect: item => {
+            return item.stat ? item.correct / item.answeredCount : 0;
+          },
+        },
+      }),
     ],
   },
 };

@@ -20,10 +20,10 @@ export function updateStat(
 }
 
 export function populateStat(
-    service = 'stats', childField = 'user', parentField = 'user') {
+    service = 'stats', nameAs = 'stat', childField = 'user', parentField = 'user') {
     return globalHooks.include({ // populate the current stat
         service,
-        nameAs: 'stat',
+        nameAs,
         parentField,
         childField,
     });
