@@ -1,8 +1,8 @@
 <md-nav-list>
     <md-list-item (click)="showQuestion(category)" *ngFor="let category of categories | async">
         <h3>{{category.name}}</h3>
-        <div class="body">
-            {{ category.stat.correct }} / {{ category.stat.answeredCount }}
-        </div>
+        <div style="flex-grow: 1"></div>
+        <app-percent [stat]="category"></app-percent>
+        <app-stat [stat]="category"></app-stat>
     </md-list-item>
 </md-nav-list>
