@@ -10,6 +10,7 @@ function assignArchiveItem() {
   };
 }
 
+// Contributes to the item creation in the archive 
 export = {
   before: {
     all: [

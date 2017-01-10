@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BattlesService } from 'app/battles/battles.service';
 
@@ -15,6 +15,7 @@ export class BattleComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private battlesService: BattlesService,
   ) { }
 
@@ -26,9 +27,6 @@ export class BattleComponent implements OnInit {
       this.battle = battle;
     });
 
-    // this.activatedRoute.root;
-    //   url.subscribe(url => {
-    //   this.url = url.toString();
-    // });
+    this.url = this.router.url;
   }
 }

@@ -1,3 +1,4 @@
+// Tells the user that the page was not found they're looking for was not 
 import errors = require('feathers-errors');
 
 export function notFound() {
