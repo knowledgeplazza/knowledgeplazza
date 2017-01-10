@@ -22,8 +22,8 @@ export class QuestionBrowserComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.categories = this.categoryService.find({
-      $sort: { percentCorrect: -1 },
+    this.categoryService.items.subscribe(categories => {
+      this.categories = categories.sort((a, b) => a.percentCorrect < b.percentCorrect ? -1 : 0);
     });
   }
 
