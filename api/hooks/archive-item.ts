@@ -5,7 +5,7 @@ import { decrementByDot, getByDot, setByDot } from './helper';
  * @export
  * @returns
  */
-export function updateUnlockCountdown(pathToStat = 'data.stat', pathToUser = 'stat.user') {
+export function updateUnlockCountdown(pathToStat = 'data.stat', pathToUser = 'params.user._id') {
   return hook => {
     let stat = getByDot(hook, pathToStat);
     let user = getByDot(hook, pathToUser);
