@@ -1,6 +1,6 @@
 import globalHooks = require('../hooks');
 
-import { getByDot, setByDot } from '../hooks';
+import { getByDot, incrementByDot, setByDot } from '../hooks';
 
 import hooks = require('feathers-hooks-common');
 
@@ -62,23 +62,16 @@ export function createStat(service: string, nameAs: string, childField: string, 
 }
 
 function calculateNewStat(stat, isCorrect: boolean, category?: string) {
-    if (isCorrect) {
-        incrementByDot(stat, 'correct');
-        if (category) {
-            incrementByDot(stat, 'categories.' + category + '.correct');
-        }
-    }
+    let categoryPath = 'categories.' + category;
+
+    incrementByDot(stat, 'correct', isCorrect ? 1 : 0);
     incrementByDot(stat, 'answeredCount');
+
     if (category) {
-        incrementByDot(stat, 'categories.' + category + '.answeredCount');
+        incrementByDot(stat, categoryPath + '.correct', isCorrect ? 1 : 0);
+        incrementByDot(stat, categoryPath + '.answeredCount');
     }
 
     return stat;
 }
 
-// adds one to the value at path, creating it if it doesn't exist
-function incrementByDot(obj, path) {
-    let current = getByDot(obj, path);
-    if (!current) { current = 0; }
-    setByDot(obj, path, current + 1);
-}

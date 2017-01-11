@@ -10,11 +10,12 @@ export const setByDot = utils.setByDot;
  * @export
  * @param {any} obj
  * @param {any} path
+ * @param {number} [incrementBy=1] how much to increment the value at path by
  */
-export function incrementByDot(obj, path: string) {
+export function incrementByDot(obj, path: string, incrementBy = 1) {
     let current = getByDot(obj, path);
     if (!current) { current = 0; }
-    setByDot(obj, path, current + 1);
+    setByDot(obj, path, current + incrementBy);
 }
 
 /**
