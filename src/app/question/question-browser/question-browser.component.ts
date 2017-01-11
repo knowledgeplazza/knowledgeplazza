@@ -25,11 +25,12 @@ export class QuestionBrowserComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.categoryService.items.subscribe(categories => {
-      this.categories = categories.sort((a, b) => a.percentCorrect - b.percentCorrect);
-    });
-    this.statsService.userStats.subscribe(stats => {
-      this.stats = stats;
+    Observable.combineLatest(
+      this.categoryService.items,
+      this.statsService.userStats,
+    ).subscribe(combined => {
+      this.categories = combined[0].sort((a, b) => a.percentCorrect - b.percentCorrect);
+      this.stats = combined[1];
     });
   }
 
