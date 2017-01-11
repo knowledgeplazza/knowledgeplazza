@@ -74,4 +74,3 @@ function calculateNewStat(stat, isCorrect: boolean, category?: string) {
 
     return stat;
 }
-

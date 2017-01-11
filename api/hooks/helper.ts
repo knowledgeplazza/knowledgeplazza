@@ -35,7 +35,6 @@ export function decrementByDot(obj, path: string) {
     return current <= 0;
 }
 
-
 /**
  * Helper function to set result property on find/get hooks
  * populate only works on property
