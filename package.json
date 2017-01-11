@@ -16,7 +16,6 @@
   },
   "private": true,
   "dependencies": {
-    "angular-cli": "1.0.0-beta.24",
     "@angular/common": "^2.4.0",
     "@angular/compiler": "^2.4.0",
     "@angular/compiler-cli": "^2.4.0",
@@ -37,6 +36,7 @@
     "@types/socket.io": "^1.4.27",
     "@types/socket.io-client": "^1.4.29",
     "@types/winston": "0.0.32",
+    "angular-cli": "1.0.0-beta.24",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "core-js": "^2.4.1",
@@ -47,6 +47,7 @@
     "feathers-errors": "^2.4.0",
     "feathers-hooks": "^1.7.1",
     "feathers-hooks-common": "^2.0.1",
+    "feathers-memory": "^1.0.1",
     "feathers-nedb": "^2.6.0",
     "feathers-reactive": "^0.4.1",
     "feathers-socketio": "^1.4.2",
