@@ -1,4 +1,4 @@
-import { compute, populateResult } from '../../../hooks';
+import { compute } from '../../../hooks';
 import { populateStat } from '../../../hooks/stat';
 const auth = require('feathers-authentication').hooks;
 import hooks = require('feathers-hooks-common');
