@@ -50,7 +50,7 @@ export function incrementStat(
 /// and sets the childField to the value of parentField in the hook data object
 export function createStat(service: string, childField: string, parentField: string) {
     return hook => {
-        if (!hook.data.stat._id) {
+        if (!hook.data.stat && !hook.data.stat._id) {
             // feathers populated an empty array, so create a new stat value
             return hook.app.service(service).create({ [childField]: getByDot(hook.data, parentField) }).then(stat => {
                 hook.data.stat = stat;
