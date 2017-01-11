@@ -5,6 +5,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { QuestionCategory } from 'models/question-category';
 
+import { StatsService } from '../../plazza/archive/stats/stats.service';
 import { QuestionCategoryService } from '../question-category.service';
 
 @Component({
@@ -15,15 +16,20 @@ import { QuestionCategoryService } from '../question-category.service';
 export class QuestionBrowserComponent implements OnInit {
 
   private categories;
+  private stats;
 
   constructor(
     private categoryService: QuestionCategoryService,
+    private statsService: StatsService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.categoryService.items.subscribe(categories => {
       this.categories = categories.sort((a, b) => a.percentCorrect - b.percentCorrect);
+    });
+    this.statsService.items.subscribe(stats => {
+      this.stats = stats;
     });
   }
 

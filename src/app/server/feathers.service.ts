@@ -92,7 +92,7 @@ export class FeathersService<T> implements Resolve<Observable<T>> {
     return this.app.service(name);
   }
 
-  get service() {
+  protected get service() {
     return this.getService(this.serviceName);
   }
 
