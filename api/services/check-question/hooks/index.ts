@@ -41,7 +41,7 @@ export = {
       updateStat(),
       hooks.iff(hook => hook.data.battle,
         // create/update battle stat entry if we get passed a battle id  
-        updateStat('battle-stats', 'battleId', 'battle'),
+        updateStat('battle-stats', 'battle-stat', 'battleId', 'battle'),
       ),
       updateUnlockCountdown(),
     ],
