@@ -28,7 +28,7 @@ export class QuestionBrowserComponent implements OnInit {
     this.categoryService.items.subscribe(categories => {
       this.categories = categories.sort((a, b) => a.percentCorrect - b.percentCorrect);
     });
-    this.statsService.items.subscribe(stats => {
+    this.statsService.userStats.subscribe(stats => {
       this.stats = stats;
     });
   }
