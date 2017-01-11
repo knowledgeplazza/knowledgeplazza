@@ -7,6 +7,11 @@ __Notes for cloud9__
 #
 Run `npm run build` and `npm start` to get started
 
+### Project Design ###
+[Software Design Document](https://docs.google.com/document/d/1qOLrjNADXHNrbiTmQbbJ5sBSlX9QTuN5O3tke-N7rx4/edit?usp=sharing)
+[Marketing Plan](https://docs.google.com/document/d/12fYWpnXTC6zFpX8XIRq30prcBXd8Gb5dPrBiygF06_w/edit?usp=sharing)
+[Question List](https://docs.google.com/document/d/1hecdxgLTgrb-3VKEZnLpVRfJmJf527jYuqiW295Un1Q/edit?usp=sharing)
+
 ### Setup ###
 To run this project on a personal computer, setup your computer using these steps:
 
