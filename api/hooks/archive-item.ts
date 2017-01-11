@@ -1,7 +1,7 @@
 import { decrementByDot, getByDot, setByDot } from './helper';
 
 /**
- * updates the unlock countdown on a stat
+ * updates the unlock countdown on a stat, unlocking an archive item and resetting if it hits zero
  * @export
  * @returns
  */

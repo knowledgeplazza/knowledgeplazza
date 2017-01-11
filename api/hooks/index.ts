@@ -10,7 +10,14 @@ import { getByDot, setByDot } from './helper';
 
 export * from './helper';
 
-export function requireString(property) {
+/**
+ * Test validation logic: requires property to be a string
+ * 
+ * @export
+ * @param {string} property
+ * @returns
+ */
+export function requireString(property: string) {
   return hook => {
     // TODO: this should be replaced by real validation logic
     // Throw error if string field does not exist or is empty
@@ -24,24 +31,14 @@ export function requireString(property) {
   };
 };
 
-// get random item
-// Ex: query = { $random: 1 } should return one random item
-export function getRandom(options) {
-  return hook => {
-    const query = hook.params.query;
-    if (query && query.$random > 0) {
-      const numResults = query.$random;
-      hook.params.query = _.omit(query, '$random');
-      hook.result = hook.app.service(options.service).find(hook.params).then(result => {
-        return _.sampleSize(result.data, numResults);
-      });
-    }
-    return hook;
-  };
-};
-
-/// Make sure that the values in an array are unique
-/// Options: {path: **pathToGetArrayFrom**, uniqueBy: **valueOfObjectsInArrayToCompare}
+/**
+ * Make sure that the values in an array are unique
+ * 
+ * @export
+ * @param {string} path pathToGetArrayFrom
+ * @param {string} [uniqueBy] valueOfObjectsInArrayToCompare
+ * @returns
+ */
 export function enforceUnique(path: string, uniqueBy?: string) {
   if (!uniqueBy) {
     return hook => {
@@ -58,6 +55,34 @@ export function enforceUnique(path: string, uniqueBy?: string) {
    }
 };
 
+/**
+ * enable get random item query
+ * Ex: query = { $random: 1 } should return one random item
+ * @export
+ * @param {any} options
+ * @returns
+ */
+export function getRandom(options) {
+  return hook => {
+    const query = hook.params.query;
+    if (query && query.$random > 0) {
+      const numResults = query.$random;
+      hook.params.query = _.omit(query, '$random');
+      hook.result = hook.app.service(options.service).find(hook.params).then(result => {
+        return _.sampleSize(result.data, numResults);
+      });
+    }
+    return hook;
+  };
+};
+
+/**
+ * enable special field '$search' in query by creating a regular expression
+ * 
+ * @export
+ * @param {any} flags flags to pass to the regular expression
+ * @returns
+ */
 export function searchRegex(flags) {
   return specialField('$search', (query, value, fieldIn) => {
     try {
@@ -74,8 +99,8 @@ export function searchRegex(flags) {
  * Shortcut for creating a special field hook
  * 
  * @export
- * @param {string} specialField
- * @param {function} callback called every time specialField is found in query
+ * @param {string} specialField name of the special field (ie. $random)
+ * @param {(query, value, fieldIn, hook?) => any} callback called every time specialField is found in query
  */
 export function specialField(specialField: string, callback: (query, value, fieldIn, hook?) => any) {
   return hook => {
@@ -92,9 +117,16 @@ export function specialField(specialField: string, callback: (query, value, fiel
   };
 };
 
-export function append() {
-  return specialField('$append', (query, value, fieldIn) => {
-    
-    return query;
-  });
-};
+/**
+ * enable special field $append
+ * !! Not yet implemented
+ * 
+ * @export
+ * @returns
+ */
+// export function append() {
+//   return specialField('$append', (query, value, fieldIn) => {
+
+//     return query;
+//   });
+// };

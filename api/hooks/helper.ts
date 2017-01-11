@@ -24,12 +24,13 @@ export function incrementByDot(obj, path: string, incrementBy = 1) {
  * @export
  * @param {any} obj
  * @param {any} path
+ * @param {number} [decrementBy=1] how much to decrement the value at path by
  * @returns {boolean} Returns 'true' if new value was decremented to zero
  */
-export function decrementByDot(obj, path: string) {
+export function decrementByDot(obj, path: string, decrementBy = 1) {
     let current = getByDot(obj, path);
     if (!current) { current = 0; }
-    current -= 1;
+    current -= decrementBy;
     setByDot(obj, path, current);
 
     return current <= 0;
