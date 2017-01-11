@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       } else {
         let config = new MdSnackBarConfig();
         config.duration = 2000;
-        this.snackBar.open('Couldn\'t Log In', null, config);
+        this.snackBar.open('Couldn\'t Sign In. Check your username and password', null, config);
       }
     });
   }

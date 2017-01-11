@@ -9,13 +9,7 @@ export function updateStat(
     categoryField = 'question.category', isCorrectFeild = 'isCorrect') {
     return hooks.combine(
         populateStat(service, nameAs, parentField, childField), // populate current stat
-        createStat(service, nameAs, childField, parentField), // or create it if it doesn't exist
-        incrementStat(service, nameAs, childField, categoryField, isCorrectFeild), // increment the counts in the stat 
-        hook => {
-            // commit new stat to the database
-            let newStat = hook.data[nameAs];
-            hook.app.service(service).patch(newStat._id, newStat);
-        },
+        incrementStat(service, nameAs, childField, categoryField, isCorrectFeild), // increment the counts in the stat
     );
 }
 
@@ -29,11 +23,9 @@ export function populateStat(
     });
 }
 
-/// takes the stat object in the hook data and updates it, 
-/// or 
-/// note that this must be folowed with a patch to save the new stats?
+/// takes the stat object in the hook data and updates it
 export function incrementStat(
-    service: string, nameAs: string, childField: string,
+    service = 'stats', nameAs = 'stat', childField = 'user',
     categoryField = 'question.category', isCorrectFeild = 'isCorrect') {
     return hook => {
         let data = hook.data;
@@ -41,23 +33,30 @@ export function incrementStat(
         let isCorrect = getByDot(data, isCorrectFeild);
         let category = getByDot(data, categoryField);
 
-        hook.data[nameAs] = calculateNewStat(data[nameAs], isCorrect, category);
+        let newStat = calculateNewStat(data[nameAs], isCorrect, category);
+
+        hook.data[nameAs] = newStat;
+        hook.app.service(service).patch(newStat._id, newStat); // save new Stat
+
         return hook;
     };
 }
 
-/// creates a stat object if one doesn't exist in the hooks data 
+/// creates a stat object 
 /// and sets the childField to the value of parentField in the hook data object
-export function createStat(service: string, nameAs: string, childField: string, parentField: string) {
+export function createStat(service = 'stats', nameAs = 'stat', childField = 'user', parentField = 'result._id') {
     return hook => {
-        if (!hook.data[nameAs] && !hook.data[nameAs]._id) {
-            // feathers populated an empty array, so create a new stat value
-            return hook.app.service(service).create({ [childField]: getByDot(hook.data, parentField) }).then(stat => {
-                hook.data[nameAs] = stat;
+        return hook.app.service(service).create({
+            [childField]: getByDot(hook, parentField),
+            categories: {},
+            correct: 1,
+            answeredCount: 1,
+            countdown: 1,
+        }).then(stat => {
+            hook.data[nameAs] = stat;
 
-                return hook;
-            });
-        }
+            return hook;
+        });
     };
 }
 

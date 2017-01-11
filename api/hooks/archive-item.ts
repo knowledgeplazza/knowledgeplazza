@@ -1,15 +1,14 @@
-import { decrementByDot, setByDot } from './helper';
+import { decrementByDot, getByDot, setByDot } from './helper';
 
 /**
  * updates the unlock countdown on a stat
- * assumes stat and user properties on hook data
  * @export
  * @returns
  */
-export function updateUnlockCountdown() {
+export function updateUnlockCountdown(pathToStat = 'data.stat', pathToUser = 'stat.user') {
   return hook => {
-    let stat = hook.data.stat;
-    let user = hook.data.user;
+    let stat = getByDot(hook, pathToStat);
+    let user = getByDot(hook, pathToUser);
 
     // decrement countdown
     let atZero = decrementByDot(stat, 'countdown');

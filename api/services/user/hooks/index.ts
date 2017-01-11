@@ -1,4 +1,5 @@
 import globalHooks = require('../../../hooks');
+import { createStat, incrementStat } from '../../../hooks/stat';
 import hooks = require('feathers-hooks-common');
 const auth = require('feathers-authentication').hooks;
 
@@ -45,7 +46,9 @@ export = {
     all: [hooks.remove('password')],
     find: [],
     get: [],
-    create: [],
+    create: [
+      createStat(), // start the user off with some good stats data
+    ],
     update: [],
     patch: [],
     remove: [],

@@ -15,7 +15,10 @@ export = {
       populateStat('stats', 'userStats'),
       compute({
         // stat for specific categories
-        stat: (item, hook) => item.userStats.categories[item.name],
+        stat: (item, hook) => {
+          let categories = item.userStats.categories;
+          return categories ? categories[item.name] : undefined;
+        },
       }),
       hooks.serialize({
         exclude: ['userStats', 'user'], // get rid of the stat, we just need the category properties
