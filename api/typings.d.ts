@@ -1,6 +1,7 @@
 
 declare module 'feathers-hooks';
 declare module 'feathers-nedb';
+declare module 'feathers-memory';
 declare module 'feathers-socketio';
 declare module 'feathers-reactive';
 declare module 'feathers-authentication';

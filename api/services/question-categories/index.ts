@@ -1,33 +1,13 @@
 import hooks = require('./hooks');
-import tools = require('./question-categories');
-
-// TODO: Change this to use feathers-memory so that question categories are cached
-// and we can use feathers common query syntax like filtering and sorting
-export class Service {
-  private app;
-  private questionCategories: any[];
-
-  constructor(private options = {}) {
-  }
-
-  setup(app) {
-    this.app = app;
-  }
-
-  find(params) {
-    // if (!this.questionCategories) {
-    this.questionCategories = tools.calculateQuestionCategories(this.app);
-    // }
-
-    return this.questionCategories;
-  }
-}
+import memory = require('feathers-memory');
 
 module.exports = function(){
   const app = this;
 
   // Initialize our service with any options it requires
-  app.use('/question-categories', new Service());
+  app.use('/question-categories', new memory({
+    id: '_id',
+  }));
 
   // Get our initialize service to that we can bind hooks
   const questionCategoriesService = app.service('/question-categories');

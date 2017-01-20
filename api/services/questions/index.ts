@@ -2,6 +2,7 @@ import path = require('path');
 import NeDB = require('nedb');
 import service = require('feathers-nedb');
 import hooks = require('./hooks');
+import { calculateQuestionCategories } from '../question-categories/question-categories';
 
 module.exports = function(){
   const app = this;
@@ -30,4 +31,9 @@ module.exports = function(){
 
   // Set up our after hooks
   questionsService.after(hooks.after);
+
+  // add calculated question categories
+  calculateQuestionCategories(app).then(questionCategories => {
+      app.service('/question-categories').create(questionCategories);
+  });
 };
